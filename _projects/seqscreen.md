@@ -7,7 +7,7 @@ importance: 1
 category: Research
 ---
 <div class="text-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
+    <div class="col-sm-6 mt-3 mt-md-0">
         {% include figure.html path="assets/img/seqscreen.jpg" title="" class="rounded z-depth-1" %}
     </div>
 </div>
