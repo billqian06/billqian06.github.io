@@ -7,9 +7,7 @@ importance: 1
 category: Research
 ---
 <div class="text-center">
-    <div class="col-sm-6 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/seqscreen.jpg" title="" class="rounded z-depth-1" %}
-    </div>
+  <img src="assets/img/seqscreen.jpg" class="rounded">
 </div>
 
 SeqScreen is a tool for characterizing the pathogenicity of short nucleotide sequences. It first gathers taxonomic and functional information on the input sequence and then utilizes this information to label the input necleotide sequence with Functions of Sequences of Concerns (FunSocs). FunSocs serve as abstractions of the underlying threat processes and as indicators of the threat level of a certain sequence. Examples of FunSocs include “disable organ” and “Cytotoxicity”.
