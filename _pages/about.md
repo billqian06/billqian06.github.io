@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='https://www.rice.edu/'>Rice University</a>
+subtitle: 钱志勤, Pinyin: Zhiqin Qian
 
 profile:
   align: right
@@ -17,9 +17,9 @@ news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
-Hi, I am a student at Rice University, majoring in computer science. I am excited about enhancing the interaction between human and artificial intelligence agents. I am currently developing a predictive model of human behavior in the context of human-robot collaboration with [Liubove Orlov Savko](https://www.linkedin.com/in/lorlov/) under Dr. [Vaibhav Unhelkar](https://unhelkar.github.io/)'s supervision.
+Hi, I am a student at <a href='https://www.rice.edu/'>Rice University</a>, majoring in computer science. I am excited about enhancing the interaction between human and artificial intelligence agents. I am currently developing a predictive model of human behavior in the context of human-robot collaboration with [Liubove Orlov Savko](https://www.linkedin.com/in/lorlov/) under Dr. [Vaibhav Unhelkar](https://unhelkar.github.io/)'s supervision.
 
-Previously, I worked on characterizing the pathogenicity of short nucleotide sequences with machine learning at [Treangen Lab](https://www.treangenlab.com/). 
+Previously, I worked on characterizing the pathogenicity of short nucleotide sequences with machine learning at [Treangen Lab](https://www.treangenlab.com/).
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
