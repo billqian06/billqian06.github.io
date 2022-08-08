@@ -12,12 +12,4 @@ implemented through the use of Java's Remote Method Invocation (RMI) and the vis
 To ensure that different ChatApps programmed by students in the class could
 effectively communicate with each other, my group designed the application programming interface (API) that specified the communication protocols between any implementation of ChatApps.
 
-Here is a video demo of my ChatApp.
-
-<!-- {% raw %}
-```html
-<video width="320" height="240" controls>
-  <source src="assets/img/chatapp.mp4" type="video/mp4">
-</video>
-```
-{% endraw %} -->
+Here is a video demo of my <a href="https://www.youtube.com/watch?v=x1PFeNmZKIs">ChatApp</a>.
