@@ -2,13 +2,13 @@
 layout: page
 title: seqscreen
 description: functional screening of pathogenic sequences
-img: assets/img/seqscreen2.jpg
+img: assets/img/dna.jpg
 importance: 1
 category: Research
 ---
 <div class="row">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/seqscreen.jpg" title="" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/seqscreen.jpg" title="" class="rounded mx-auto d-block" %}
     </div>
 </div>
 
