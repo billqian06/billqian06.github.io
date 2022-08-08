@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: 钱志勤, Pinyin: Zhiqin Qian
+subtitle: 
 
 profile:
   align: right
