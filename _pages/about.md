@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Rice University
+<!-- subtitle: / -->
 
 profile:
   align: right
