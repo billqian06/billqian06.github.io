@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-<!-- subtitle: / -->
+subtitle: Zhiqin Qian (Pinyin)
 
 profile:
   align: right
