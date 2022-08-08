@@ -2,7 +2,7 @@
 layout: page
 title: seqscreen
 description: functional screening of pathogenic sequences
-img: assets/img/seqscreen.jpg
+img: assets/img/seqscreen2.jpg
 importance: 1
 category: Research
 ---
