@@ -19,7 +19,7 @@ In response to our demand for a realistic domain that is not exorbitantly resour
     <div class="col-sm-8 mt-3 mt-md-0">
         {% include figure.html path="assets/img/minimap1.jpg" title="" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm-4 mt-3 mt-md-15">
+    <div class="col-sm-4 mt-3 mt-md-5">
         {% include figure.html path="assets/img/minimap2.jpg" title="" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
@@ -33,7 +33,7 @@ While we can collect data on the state of the environment and the action taken b
     <div class="col-sm-6 mt-3 mt-md-0">
         {% include figure.html path="assets/img/bioharness.jpg" title="" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm-6 mt-3 mt-md-15">
+    <div class="col-sm-6 mt-3 mt-md-5">
         {% include figure.html path="assets/img/tobii.jpg" title="" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
