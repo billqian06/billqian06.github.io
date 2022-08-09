@@ -3,7 +3,7 @@ layout: page
 title: seqscreen
 description: functional screening of pathogenic sequences
 img: assets/img/dna.jpg
-importance: 1
+importance: 2
 category: Research
 ---
 <div class="row">
