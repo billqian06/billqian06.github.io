@@ -9,7 +9,7 @@ category: Research
 
 The Unhelkar Lab has developed the Factorial Agent Markov Model (FAMM) that uses an array of latent states of a human agent (such as workload and intent) to model the agent's behavior. The idea is that when a human-robot team performs a task, if the robot has a more accurate mental model of the human's behavior, then the robot can better collaborate with the human.
 
-FAMM was initially tested on a few small-scale synthetic domains where ground truths were handcrafted and used to generate data samples. Those experiments demonstrated that FAMM outperformed other behavior modeling algorithms that either do not take an agent's latent variables into consideration or only uses a single latent variable (as opposed to an array, hence the name factorial) when predicting human behavior.
+FAMM was initially tested on a few small-scale synthetic domains where ground truths were handcrafted and used to generate data samples. Those experiments demonstrated that FAMM outperformed other behavior modeling algorithms that either do not take an agent's latent variables into consideration or only use a single latent variable (as opposed to an array, hence the name factorial) when predicting human behavior.
 
 To more conclusively verify the effectiveness of FAMM, however, ideally, we need to have a more complex and realistic environment where FAMM can be used to predict real, non-synthetic human behavior. Nevertheless, training robots and humans in the real world is highly resource-intensive. What makes the matter worse is that it is often difficult to measure the “ground truth” of human-robot teamwork in real world settings.
 
@@ -19,7 +19,7 @@ In response to our demand for a realistic domain that is not exorbitantly resour
     <div class="col-sm-8 mt-3 mt-md-0">
         {% include figure.html path="assets/img/minimap1.jpg" title="" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
+    <div class="col-sm-4 mt-3 mt-md-2">
         {% include figure.html path="assets/img/minimap2.jpg" title="" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
