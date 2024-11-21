@@ -13,13 +13,13 @@ profile:
     <p>123 your address street</p>
     <p>Your City, State 12345</p> -->
 
-news: true  # includes a list of news items
+news: false  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
-Hi, I am an undergraduate student at Rice University, and I will be continuing at Rice as a PhD student in the Department of Computer Science. 
+Hi, I am a second-year PhD student in the Department of Computer Science at Rice University. 
 
-I am part of the Human-Centered AI and Robotics Lab led by Prof. [Vaibhav Unhelkar](https://unhelkar.github.io/). My research interest lies in utilizing multimodal information (i.e. language and images) to help autonomous agents learn to perform tasks and better collaborate with humans.
+I am a member of the Human-Centered AI and Robotics Lab led by Prof. [Vaibhav Unhelkar](https://unhelkar.github.io/). My research focuses on leveraging multimodal information, such as language and images, to enable autonomous agents to learn task performance and collaborate more effectively with humans.
 
 Previously, I worked on characterizing the pathogenicity of short nucleotide sequences with machine learning at [Treangen Lab](https://www.treangenlab.com/).
 
