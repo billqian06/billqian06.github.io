@@ -25,12 +25,23 @@
   publisher={American Association of Physics Teachers,}
 }
 
+@inproceedings{qian2024hierarchical,
+  abbr={AAMAS},
+  title={Hierarchical Reward Design from Language: Enhancing Alignment of Agent Behavior with Human Specifications},
+  author={Qian, Z. and Diaz, R. and Seo, S. and Unhelkar, V.},
+  abstract={When training AI agents to perform tasks, humans often care not only about whether a task is completed but also how it is performed. As agents tackle increasingly complex tasks, aligning their behavior with human-provided specifications becomes critical for responsible AI deployment. Reward design provides a direct channel for such alignment by translating human expectations into reward functions that guide reinforcement learning (RL). However, existing methods are often too limited to capture nuanced human preferences that arise in long-horizon tasks. Hence, we introduce Hierarchical Reward Design for Language (HRDL): a problem formulation that extends classical reward design to encode richer behavioral specifications for Hierarchical RL agents. We further propose Language to Hierarchical Rewards (L2HR), our proposed solution to HRDL. Human subject and numerical experiments show that Hierarchical RL agents trained with rewards designed via L2HR not only complete tasks effectively but also better adhere to human specifications. Together, HRD and L2HR advance the research on human-aligned AI agents.},
+  booktitle={International Conference on Autonomous Agents and Multiagent Systems (AAMAS)},
+  html={assets/pdf/qian2026_hrd.pdf},
+  year={2026},
+  selected={true}
+}
+
 @inproceedings{qian2024measuring,
   abbr={HRI Companion},
   title={Measuring Variations in Workload during Human-Robot Collaboration through Automated After-Action Reviews},
   author={Qian, Z. and Orlov Savko, L. and Neubauer, C. and Gremillion, G. and Unhelkar, V.},
   abstract={Human collaborator's workload plays a central role in human-robot collaboration. Algorithms designed to minimize cognitive workload enhance fluent human-robot teamwork. Time series data of workload is vital for both designing and assessing these algorithms. However, accurately quantifying and measuring cognitive workload, particularly at high temporal resolution, poses a substantial challenge. Towards addressing this challenge, we explore the potential of after-action reviews (AARs) as a tool for gauging workload during human-robot collaboration. First, through a case study, we present and demonstrate AutoAAR for measuring human workload post-task at a high temporal resolution. Second, through a user study, we quantify the validity and utility of measurements derived using AutoAAR for human-robot teamwork. The paper concludes with guidelines and future directions to extend this method to measure other internal states, such as trust and intent.},
-  booktitle={Companion of the 2024 ACM/IEEE International Conference on Human-Robot Interaction},
+  booktitle={Companion of the ACM/IEEE International Conference on Human-Robot Interaction (HRI)},
   pages={852--856},
   year={2024},
   html={https://dl.acm.org/doi/abs/10.1145/3610978.3640677},
@@ -42,7 +53,7 @@
   title={RW4T Dataset: Data of Human-Robot Behavior and Cognitive States in Simulated Disaster Response Tasks},
   author={Orlov Savko, L. and Qian, Z. and Gremillion, G. and Neubauer, C. and Canady, J. and Unhelkar, V.},
   abstract={To forge effective collaborations with humans, robots require the capacity to understand and predict the behaviors of their human counterparts. There is a growing body of computational research on human modeling for human-robot interaction (HRI). However, a key bottleneck in conducting this research is the relative lack of data of cognitive states -- like intent, workload, and trust -- which undeniably affect human behavior. Despite their significance, these states are elusive to measure, making the assembly of datasets a challenge and hindering the progression of human modeling techniques. To help address this, we first introduce Rescue World for Teams (RW4T): a configurable testbed to simulate disaster response scenarios requiring human-robot collaboration. Next, using RW4T, we curate a multimodal dataset of human-robot behavior and cognitive states in dyadic human-robot collaboration. This RW4T dataset includes state, action and reward sequences, and all the necessary data to replay a visual task execution. It further contains psychophysiological metrics like heart rate and pupillometry, complemented by self-reported cognitive state measures. With data from 20 participants, each undertaking five human-robot collaborative tasks, this dataset (comprising of 100 unique trajectories) accompanied with the simulator can serve as a valuable benchmark for human behavior modeling.},
-  booktitle={Proceedings of the 2024 ACM/IEEE International Conference on Human-Robot Interaction},
+  booktitle={Proceedings of the ACM/IEEE International Conference on Human-Robot Interaction (HRI)},
   pages={924--928},
   year={2024},
   html={https://dl.acm.org/doi/abs/10.1145/3610977.3637481},
