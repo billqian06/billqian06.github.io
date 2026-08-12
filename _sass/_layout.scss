@@ -1,50 +1,57 @@
 /******************************************************************************
- * Content
+ * Page frame: measure, rhythm, and the space the fixed navbar occupies.
  ******************************************************************************/
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  padding-bottom: 70px;
+  padding-bottom: 0;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
+  font-family: $font-serif;
+  font-size: 1.09rem;
+  font-weight: var(--global-prose-weight);
+  line-height: 1.66;
 
   h1, h2, h3, h4, h5, h6 {
-    scroll-margin-top: 66px;
+    scroll-margin-top: $nav-height + 16px;
   }
 }
 
 body.fixed-top-nav {
-  // Add some padding for the nav-bar.
-  padding-top: 56px;
+  padding-top: $nav-height;
 }
 
 body.sticky-bottom-footer {
-  // Remove padding below footer.
   padding-bottom: 0;
 }
 
 .container {
   max-width: $max-content-width;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-// Profile
-.profile {
-  img {
-    width: 100%;
+// The main content well. Bootstrap's `mt-5` on the wrapper is neutralised here
+// so vertical rhythm is set in one place.
+body > .container.mt-5 {
+  margin-top: 0 !important;
+  padding-top: 3.5rem;
+}
+
+@media (max-width: 767px) {
+  body > .container.mt-5 {
+    padding-top: 2.25rem;
+  }
+  .container {
+    padding-left: 1.15rem;
+    padding-right: 1.15rem;
   }
 }
 
-// TODO: redefine content layout.
-
-
-/******************************************************************************
- * Publications
- ******************************************************************************/
-
-// TODO: redefine publications layout.
-
-
-/*****************************************************************************
-* Projects
-*****************************************************************************/
-
-// TODO: redefine projects layout.
+// Prose measure: long-form text never runs wider than comfortable reading.
+.measure {
+  max-width: 64ch;
+}
