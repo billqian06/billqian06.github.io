@@ -148,8 +148,14 @@
       <h2 class="title is-3">Why Hierarchical Reward Design?</h2>
       <div class="content">
         <p class="section-lead">
-          People naturally break long tasks into subtasks, and hierarchical RL agents are built the same way.
-          However, <b>reward design for hierarchical agents remains largely unexplored</b>.
+          People naturally break long tasks into subtasks, and hierarchical RL agents are built the same way: a
+          high-level policy selects which subtask (an <i>option</i>) to pursue, and a low-level policy selects the
+          actions that carry it out. However, <b>reward design for hierarchical agents remains largely
+            unexplored</b>.
+        </p>
+        <p>
+          Consider the Rescue World specification from Figure 1. It constrains three different aspects of the
+          agent's behavior:
         </p>
       </div>
       <div class="columns">
@@ -158,6 +164,7 @@
             <div class="concept-kicker">What</div>
             <h4>Which subtasks to perform</h4>
             <p>&ldquo;Collect and deliver all supplies in the environment.&rdquo;</p>
+            <div class="concept-note">Captured by the task reward.</div>
           </div>
         </div>
         <div class="column">
@@ -165,6 +172,7 @@
             <div class="concept-kicker">Which order</div>
             <h4>How subtasks are sequenced</h4>
             <p>&ldquo;Group objects of the same type: deliver all supplies of one type before switching.&rdquo;</p>
+            <div class="concept-note is-new">Depends on the previous subtask.</div>
           </div>
         </div>
         <div class="column">
@@ -172,6 +180,7 @@
             <div class="concept-kicker">How</div>
             <h4>How each subtask is executed</h4>
             <p>&ldquo;Avoid yellow danger zones when delivering an object.&rdquo;</p>
+            <div class="concept-note is-new">Can depend on the current subtask.</div>
           </div>
         </div>
       </div>
@@ -179,10 +188,10 @@
         <div class="column is-7">
           <div class="content">
             <p>
-              Existing reward design methods produce a single <b>flat</b> reward, which scores each action
-              based only on the current state. Because it can't tell which subtask the agent is working on or
-              has just finished, it can't capture preferences about the order of subtasks or how each one
-              should be done. Prior work on hierarchical RL usually <i>assumes</i> these rewards are given;
+              Existing reward design methods produce a single <b>flat</b> reward, which
+              scores each action based only on the current state. It can't tell which subtask the agent is
+              pursuing or has just finished, so it can't fully capture the second and third kinds of
+              specification. Prior work on hierarchical RL usually <i>assumes</i> hierarchical rewards are given;
               HRDL formalizes how to <i>design</i> them.
             </p>
           </div>
@@ -223,9 +232,9 @@
       <h2 class="title is-3">Hierarchical Reward Design (HRD)</h2>
       <div class="content">
         <p class="section-lead">
-          HRD replaces the single flat reward with two rewards that are aware of the agent's subtasks: a
-          <b>high-level reward</b> for choosing which subtask to do next, and a <b>low-level reward</b> for how
-          each subtask is carried out.
+          HRD replaces the single flat reward with two rewards that also take the agent's options as input: a
+          <b>high-level reward</b> for option selection, and a <b>low-level reward</b> for the actions taken while
+          executing an option.
         </p>
       </div>
 
@@ -234,8 +243,8 @@
           <thead>
             <tr>
               <th>Reward</th>
-              <th>What it looks at</th>
-              <th>What it scores</th>
+              <th>Inputs</th>
+              <th>What it rewards</th>
             </tr>
           </thead>
           <tbody>
@@ -246,50 +255,36 @@
             </tr>
             <tr>
               <td class="reward-name">High-level<span class="reward-origin">HRD</span></td>
-              <td><span class="arg is-new">previous subtask</span> <span class="arg">state</span> <span
-                  class="arg is-new">next subtask</span></td>
-              <td>Which subtask to do next</td>
+              <td><span class="arg is-new">previous option</span> <span class="arg">state</span> <span
+                  class="arg is-new">selected option</span></td>
+              <td>Option selection: which option to execute next</td>
             </tr>
             <tr>
               <td class="reward-name">Low-level<span class="reward-origin">HRD</span></td>
-              <td><span class="arg">state</span> <span class="arg is-new">current subtask</span> <span
+              <td><span class="arg">state</span> <span class="arg is-new">current option</span> <span
                   class="arg">action</span></td>
-              <td>Each action, knowing which subtask it serves</td>
+              <td>Each action, given the option being executed</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="table-note"><span class="arg is-new">Highlighted</span> inputs carry subtask information that a flat
-        reward never sees.</p>
+      <p class="table-note"><span class="arg is-new">Highlighted</span> inputs carry option information that a flat
+        reward never receives.</p>
 
-      <div class="columns" style="margin-top: 1rem;">
-        <div class="column">
-          <div class="concept-card">
-            <div class="concept-kicker">Knowing the previous subtask</div>
-            <h4>Rules about order</h4>
-            <p>
-              <i>&ldquo;Deliver all supplies of one type before switching.&rdquo;</i> Following this rule
-              requires knowing what was delivered last, which a flat reward has no way of tracking.
-            </p>
-          </div>
-        </div>
-        <div class="column">
-          <div class="concept-card">
-            <div class="concept-kicker">Knowing the current subtask</div>
-            <h4>Rules that depend on the subtask</h4>
-            <p>
-              <i>&ldquo;Avoid the stool while going to pick up or drop off an egg.&rdquo;</i> A flat reward can
-              see where the agent is, but not which subtask it is working on.
-            </p>
-          </div>
-        </div>
+      <h3 class="title is-5" style="margin-top: 1.5rem;">Hierarchical rewards can express more than flat rewards</h3>
+      <div class="content">
+        <p>
+          Any flat reward is a special case of a hierarchical one that ignores its option inputs. The reverse
+          isn't true: some specifications, such as the &ldquo;which order&rdquo; example in the previous section,
+          can only be expressed with the option inputs (Properties 1 and 2, Appendix B.3).
+        </p>
       </div>
 
       <h3 class="title is-5" style="margin-top: 1.5rem;">From language to rewards (HRDL)</h3>
       <div class="content">
         <p>
-          HRDL keeps the rewards a task already has and adds an <b>alignment reward</b> at each level,
-          generated from the user's written specification:
+          HRDL keeps the rewards a task already has and adds a <b>designed reward</b> at each level, generated
+          from the user's natural-language specification:
         </p>
       </div>
       <div class="word-eq">
@@ -297,30 +292,23 @@
         <span class="eq-op">=</span>
         <span class="eq-term">task reward</span>
         <span class="eq-op">+</span>
-        <span class="eq-term is-language">alignment reward for choosing subtasks</span>
+        <span class="eq-term is-language">designed high-level reward</span>
       </div>
       <div class="word-eq">
         <span class="eq-term is-total">Low-level reward</span>
         <span class="eq-op">=</span>
-        <span class="eq-term">subtask-completion reward</span>
+        <span class="eq-term">pseudo-reward for subtask completion</span>
         <span class="eq-op">+</span>
-        <span class="eq-term is-language">alignment reward for executing subtasks</span>
+        <span class="eq-term is-language">designed low-level reward</span>
       </div>
       <p class="table-note"><span class="arg is-new">Highlighted</span> terms are generated from the natural-language
         specification.</p>
       <div class="content" style="margin-top: 1rem;">
         <p>
-          The original rewards make sure the agent still completes the task, while the alignment rewards shape
-          <i>how</i> it does so. Each level is a standard RL problem, so off-the-shelf algorithms can train it
-          (PPO for the low level and DQN-style methods for the high level).
-        </p>
-      </div>
-      <div class="callout">
-        <p><b>Hierarchical rewards can express everything flat rewards can, and more.</b></p>
-        <p>
-          Any flat reward can be written as a hierarchical one that simply ignores its subtask inputs. The
-          reverse isn't true: some specifications can't be expressed with a flat reward at all (Properties 1
-          and 2, Appendix B.3).
+          The task reward and pseudo-reward keep the agent completing the task and its subtasks, while the
+          designed rewards shape <i>how</i> it does so. Each level forms a standard decision process (an MDP per
+          option at the low level, a semi-MDP at the high level), so off-the-shelf RL algorithms can train it:
+          PPO for the low level and DQN-style methods for the high level.
         </p>
       </div>
     </div>
@@ -344,8 +332,8 @@
           <ol class="prompt-steps content">
             <li><b>Task description</b>, including the rough scale of the task reward (but not its code).</li>
             <li><b>Environment code</b> that exposes the state and action spaces.</li>
-            <li><b>Subtask and action spaces</b>, so the LLM can tell high-level decisions apart from low-level
-              ones.</li>
+            <li><b>Option and action spaces</b>, so the LLM can separate option selection (high level) from
+              action selection (low level).</li>
             <li><b>Behavior specification</b>: how the user wants the task done, beyond just completing it.</li>
             <li><b>Formatting and reward design tips</b>.</li>
           </ol>
@@ -382,7 +370,7 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
           <div class="stage-card">
             <h4>Stage 1 &middot; Low level</h4>
             <p>
-              The LLM generates several candidate low-level alignment rewards (8 in our experiments), and each
+              The LLM generates several candidate low-level designed rewards (8 in our experiments), and each
               one is used to train a low-level policy. Only the policies that still complete their subtasks are
               kept.
             </p>
@@ -392,7 +380,7 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
           <div class="stage-card">
             <h4>Stage 2 &middot; High level</h4>
             <p>
-              The LLM then generates candidate high-level alignment rewards, each used to train a high-level
+              The LLM then generates candidate high-level designed rewards, each used to train a high-level
               policy on top of one of the kept low-level policies. Reward pairs whose agents still complete the
               task are returned.
             </p>

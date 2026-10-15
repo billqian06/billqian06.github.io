@@ -168,6 +168,8 @@ body {
 /* ---------- Concept cards ---------- */
 
 .concept-card {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     padding: 1.25rem 1.5rem;
     border: 1px solid var(--rule);
@@ -195,15 +197,23 @@ body {
     color: var(--muted);
 }
 
-.callout {
-    padding: 1.1rem 1.4rem;
-    border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    background: var(--accent-soft);
+.concept-card p:not(:last-child) {
+    margin-bottom: 0.9rem;
 }
 
-.callout p:not(:last-child) {
-    margin-bottom: 0.6rem;
+/* Bottom line of a Why-section card: what the specification depends on. Pinned to the card's bottom so the
+   notes line up across cards. */
+.concept-note {
+    margin-top: auto;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.concept-note.is-new {
+    color: var(--accent);
 }
 
 /* ---------- HRD: reward inputs and word equations ---------- */
