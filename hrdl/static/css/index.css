@@ -1,4 +1,4 @@
-/* HRDL project page. Layout follows the Nerfies / Eureka project-page template (Bulma). */
+/* HRDL project page. Layout follows the Nerfies project-page template (Bulma). */
 
 :root {
     --accent: #2563eb;
@@ -112,6 +112,12 @@ body {
     fill: var(--accent);
     stroke: var(--accent);
     stroke-width: 0.6;
+}
+
+/* Centered figure kept below its native width (e.g. Figure 7, 800px wide) so it stays sharp. */
+.narrow-figure {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .figure-caption {
@@ -384,7 +390,7 @@ body {
 
 .domain-meta {
     margin: 0.25rem 0 0.75rem;
-    font-size: 0.9rem;
+    font-size: 0.86rem;
     color: var(--muted);
 }
 
@@ -413,39 +419,13 @@ body {
 
 /* ---------- Results ---------- */
 
-.stat-tile {
-    height: 100%;
-    padding: 1.1rem 1rem;
-    border: 1px solid var(--rule);
-    border-radius: 10px;
-    text-align: center;
-}
-
-.stat-tile .stat-domain {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-.stat-tile .stat-value {
-    margin: 0.3rem 0 0.1rem;
-    font-family: "Google Sans", "Noto Sans", sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--hier);
-}
-
-.stat-tile .stat-vs {
-    font-size: 0.95rem;
-    color: var(--flat);
-}
-
-.stat-tile .stat-label {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--muted);
+/* Highlighted one-sentence answer under each result. */
+.takeaway {
+    margin: 1rem 0 0.6rem;
+    padding: 0.15rem 0 0.15rem 0.85rem;
+    border-left: 3px solid var(--accent);
+    font-weight: 600;
+    color: var(--ink);
 }
 
 .question-label {
@@ -517,6 +497,23 @@ body {
     display: block;
     width: 100%;
     border-radius: 6px;
+}
+
+/* Specification panel shown to the left of each Flat/Hier video pair. */
+.video-spec {
+    padding: 1rem 1.1rem;
+    border-radius: 10px;
+    background: #f6f8fa;
+    font-size: 0.92rem;
+}
+
+/* Extra space above each High-level / Low-level block so the parts read as separate sections. */
+.video-spec-item {
+    margin-top: 1.25rem;
+}
+
+.video-spec-item .tag {
+    margin-bottom: 0.3rem;
 }
 
 /* ---------- BibTeX & footer ---------- */

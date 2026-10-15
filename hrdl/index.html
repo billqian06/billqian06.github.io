@@ -212,9 +212,6 @@
             </text>
             <text class="venn-core" x="335" y="125" text-anchor="middle" dominant-baseline="central">HRDL</text>
           </svg>
-          <p class="figure-caption">
-            <b>Figure 2.</b> HRDL lies at the intersection of hierarchical RL and reward design from language.
-          </p>
         </div>
       </div>
     </div>
@@ -402,12 +399,6 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
           </div>
         </div>
       </div>
-      <div class="content">
-        <p>
-          Each candidate must compile and may only use variables exposed in the prompt. In practice, at least
-          one candidate in every batch passes these checks.
-        </p>
-      </div>
     </div>
   </section>
 
@@ -448,7 +439,7 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
           <img class="paper-figure" src="static/images/domain_kitchen.png" alt="Kitchen domain"
             data-label="Kitchen screenshot" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
           <h4>Kitchen</h4>
-          <p class="domain-meta">Single-agent Overcooked &middot; 699-dim state &middot; 5 subtasks</p>
+          <p class="domain-meta">Overcooked &middot; 699-dim state &middot; 5 subtasks</p>
           <p style="margin-bottom: 0.75rem;">Prepare a salad with lettuce, tomatoes, and onions.</p>
           <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Chopping:</b> follow a preferred
               order, e.g., tomatoes &rarr; onions &rarr; lettuce.</span></div>
@@ -471,55 +462,20 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
         </p>
       </div>
 
-      <div class="columns is-multiline">
-        <div class="column is-3-desktop is-6-tablet">
-          <div class="stat-tile">
-            <div class="stat-domain">Rescue World</div>
-            <div class="stat-value">69.2%</div>
-            <div class="stat-vs">vs. 12.5% Flat</div>
-            <div class="stat-label">of policies reach expert-level alignment on both levels</div>
-          </div>
-        </div>
-        <div class="column is-3-desktop is-6-tablet">
-          <div class="stat-tile">
-            <div class="stat-domain">iTHOR</div>
-            <div class="stat-value">37.68</div>
-            <div class="stat-vs">vs. 3.27 Flat</div>
-            <div class="stat-label">total return (task + alignment)</div>
-          </div>
-        </div>
-        <div class="column is-3-desktop is-6-tablet">
-          <div class="stat-tile">
-            <div class="stat-domain">Kitchen</div>
-            <div class="stat-value">92.9%</div>
-            <div class="stat-vs">vs. 10.0% Flat</div>
-            <div class="stat-label">of policies follow the chopping specification</div>
-          </div>
-        </div>
-        <div class="column is-3-desktop is-6-tablet">
-          <div class="stat-tile">
-            <div class="stat-domain">User study</div>
-            <div class="stat-value">4.76</div>
-            <div class="stat-vs">vs. 2.42 Flat</div>
-            <div class="stat-label">human rating for persistence in Rescue World (1&ndash;5)</div>
-          </div>
-        </div>
-      </div>
-
       <!-- Q1 + Q2 -->
-      <div class="columns" style="margin-top: 1.5rem;">
+      <div class="columns">
         <div class="column">
           <h3 class="title is-5"><span class="question-label">Q1</span>Is the generated code valid?</h3>
           <img class="paper-figure" src="static/images/syntax_error_rates.png" alt="Syntax error rates"
             data-label="Figure 5: Syntax error rates" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
           <p class="figure-caption">
-            <b>Figure 5.</b> Syntax error rates for LLM-based reward generation (24 candidates per configuration).
+            <b>Figure 5.</b> Syntax error rates for LLM-based reward generation.
           </p>
-          <div class="content" style="margin-top: 0.75rem;">
+          <p class="takeaway">Hierarchical reward code has far fewer syntax errors in every domain.</p>
+          <div class="content">
             <p>
-              Hierarchical generation produces far fewer errors in every domain. Without access to the previous
-              subtask, the flat approach often invents variables that don't exist, such as
-              <code>last_delivered_type</code>.
+              Without access to the previous subtask, the flat approach often invents variables that don't exist,
+              such as <code>last_delivered_type</code>.
             </p>
           </div>
         </div>
@@ -530,12 +486,7 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
           <p class="figure-caption">
             <b>Figure 6.</b> Share of syntactically valid reward candidates that preserve task feasibility.
           </p>
-          <div class="content" style="margin-top: 0.75rem;">
-            <p>
-              In every domain, Hier rewards are more likely to still let the agent complete the task. Flat
-              rewards tend to rely on spurious heuristics, so the agent can collect reward in unintended ways.
-            </p>
-          </div>
+          <p class="takeaway">In every domain, Hier rewards more often still let the agent complete the task.</p>
         </div>
       </div>
 
@@ -654,13 +605,8 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
         reward and both alignment rewards. Expert % is the share of policies that reach the maximum possible
         return. Flat and Hier results include only candidates that complete the task.
       </p>
-      <div class="content" style="margin-top: 1rem;">
-        <p>
-          Hier achieves the best high-level alignment in every domain, since rules like persistence and
-          diversity depend on the previous subtask. Kitchen shows that hierarchy helps <b>even when a flat reward
-            is theoretically sufficient</b>: only one flat candidate encoded the chopping order correctly.
-        </p>
-      </div>
+      <p class="takeaway">Hier agents follow the specification best in every domain, even in Kitchen, where a flat
+        reward is theoretically sufficient.</p>
     </div>
   </section>
 
@@ -675,60 +621,15 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
           1&ndash;5 scale.
         </p>
       </div>
-      <div class="columns is-vcentered">
-        <div class="column is-7">
-          <img class="paper-figure" src="static/images/human_ratings.png" alt="Human ratings of agent alignment"
-            data-label="Figure 7: Human ratings for agent alignment" data-ratio="16 / 9"
-            onerror="hrdlPlaceholder(this)">
-          <p class="figure-caption"><b>Figure 7.</b> Participants' ratings of how well each agent followed the
-            specification.</p>
-        </div>
-        <div class="column is-5">
-          <div class="content">
-            <ul>
-              <li><b>Rescue World persistence:</b> 4.76 for Hier vs. 2.42 for Flat.</li>
-              <li><b>Rescue World overall:</b> 4.64 vs. 3.46; the two were rated similarly on safety.</li>
-              <li><b>Kitchen chopping:</b> 4.47 vs. 1.70 (<i>p</i> &lt; 0.001).</li>
-            </ul>
-          </div>
-        </div>
+      <div class="narrow-figure">
+        <img class="paper-figure" src="static/images/human_ratings.png" alt="Human ratings of agent alignment"
+          data-label="Figure 7: Human ratings for agent alignment" data-ratio="16 / 9"
+          onerror="hrdlPlaceholder(this)">
+        <p class="figure-caption"><b>Figure 7.</b> Participants' ratings of how well each agent followed the
+          specification.</p>
       </div>
-      <div class="results-table-wrapper" style="margin-top: 1rem;">
-        <table class="table is-hoverable results-table">
-          <thead>
-            <tr>
-              <th rowspan="2">Method</th>
-              <th colspan="3">Rescue World</th>
-              <th>Kitchen</th>
-            </tr>
-            <tr>
-              <th>Persistence &uarr;</th>
-              <th>Safety &uarr;</th>
-              <th>Overall &uarr;</th>
-              <th>Chopping &uarr;</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="method-cell">Flat</td>
-              <td>12.50%</td>
-              <td>50.00%</td>
-              <td>12.50%</td>
-              <td>10.00%</td>
-            </tr>
-            <tr class="is-hier">
-              <td class="method-cell">Hier</td>
-              <td>76.92%</td>
-              <td>61.54%</td>
-              <td>53.85%</td>
-              <td>71.43%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="table-note">
-        <b>Table 2.</b> Share of candidate policies that received a perfect alignment score from every participant.
-      </p>
+      <p class="takeaway">Participants consistently rated Hier agents as better aligned than Flat agents on the
+        high-level specifications, which depend on subtask order, and rated the two similarly on low-level safety.</p>
     </div>
   </section>
 
@@ -742,7 +643,16 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
       </div>
       <div class="video-grid">
         <h3 class="title is-5">Rescue World</h3>
-        <div class="columns">
+        <div class="columns is-vcentered">
+          <div class="column is-3">
+            <div class="video-spec">
+              <p class="video-spec-task"><b>Task:</b> Collect and deliver all supplies.</p>
+              <div class="video-spec-item"><span class="tag is-high">High-level</span>
+                <p><b>Persistence:</b> deliver all supplies of one type before switching to the other.</p></div>
+              <div class="video-spec-item"><span class="tag is-low">Low-level</span>
+                <p><b>Safety:</b> avoid the yellow hazard zones while carrying supplies.</p></div>
+            </div>
+          </div>
           <div class="column">
             <p class="video-label is-flat">Flat</p>
             <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9"
@@ -759,7 +669,16 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
           </div>
         </div>
         <h3 class="title is-5">iTHOR</h3>
-        <div class="columns">
+        <div class="columns is-vcentered">
+          <div class="column is-3">
+            <div class="video-spec">
+              <p class="video-spec-task"><b>Task:</b> Carry the apples and eggs from the dining table to the sink.</p>
+              <div class="video-spec-item"><span class="tag is-high">High-level</span>
+                <p><b>Diversity:</b> never deliver the same item type twice in a row.</p></div>
+              <div class="video-spec-item"><span class="tag is-low">Low-level</span>
+                <p><b>Avoidance:</b> stay away from the stool while going to pick up or drop off an egg.</p></div>
+            </div>
+          </div>
           <div class="column">
             <p class="video-label is-flat">Flat</p>
             <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9"
@@ -776,7 +695,16 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
           </div>
         </div>
         <h3 class="title is-5">Kitchen</h3>
-        <div class="columns">
+        <div class="columns is-vcentered">
+          <div class="column is-3">
+            <div class="video-spec">
+              <p class="video-spec-task"><b>Task:</b> Prepare a salad with lettuce, tomatoes, and onions.</p>
+              <div class="video-spec-item"><span class="tag is-high">High-level</span>
+                <p><b>Chopping order:</b> tomato &rarr; onion &rarr; lettuce.</p></div>
+              <div class="video-spec-item"><span class="tag is-light">Low-level</span>
+                <p>No specification; the low-level policies are fixed.</p></div>
+            </div>
+          </div>
           <div class="column">
             <p class="video-label is-flat">Flat</p>
             <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9"
@@ -792,21 +720,6 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
             </video>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== Conclusion ===================== -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3">Conclusion</h2>
-      <div class="content">
-        <p>
-          HRD is more expressive than flat reward design and works with existing RL algorithms. L2HR, our first
-          solution to HRDL, achieves considerably better or comparable results in both numerical and human
-          evaluations. Natural next steps include testing HRD in real-world robotics and
-          richer reward generation with evolutionary optimization or human feedback.
-        </p>
       </div>
     </div>
   </section>
@@ -831,7 +744,7 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
       </p>
       <p>
         Page layout adapted from the <a target="_blank" href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
-        project page template, as used by <a target="_blank" href="https://eureka-research.github.io/">Eureka</a>.
+        project page template.
       </p>
     </div>
   </footer>
