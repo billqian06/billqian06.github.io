@@ -406,33 +406,27 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
             data-label="Rescue World screenshot" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
           <h4>Rescue World</h4>
           <p class="domain-meta">Variant of RW4T &middot; 407-dim state &middot; 8 subtasks</p>
-          <p style="margin-bottom: 0.75rem;">Collect and deliver all supplies in a disaster-response map.</p>
-          <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Persistence:</b> deliver all
-              supplies of one type before switching.</span></div>
-          <div class="spec-row"><span class="tag is-low">Low-level</span><span><b>Safety:</b> avoid hazard zones while
-              carrying supplies.</span></div>
+          <p style="margin-bottom: 0.75rem;">Deliver all supplies on a disaster-response map.</p>
+          <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Persistence:</b> deliver all objects of one type before switching to the other type.</span></div>
+          <div class="spec-row"><span class="tag is-low">Low-level</span><span><b>Safety:</b> avoid the yellow danger zones while delivering an object.</span></div>
         </div>
         <div class="column domain-card">
           <img class="paper-figure" src="static/images/domain_ithor.png" alt="iTHOR domain"
             data-label="iTHOR screenshot" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
           <h4>iTHOR</h4>
           <p class="domain-meta">AI2-THOR kitchen &middot; 30-dim state &middot; 8 subtasks</p>
-          <p style="margin-bottom: 0.75rem;">Carry apples and eggs from the dining table to the sink.</p>
-          <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Diversity:</b> deliver a different
-              item type than the previous one.</span></div>
-          <div class="spec-row"><span class="tag is-low">Low-level</span><span><b>Avoidance:</b> stay away from the
-              stool while picking up or delivering an egg.</span></div>
+          <p style="margin-bottom: 0.75rem;">Move all apples and eggs from the dining table to the sink.</p>
+          <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Diversity:</b> alternate between apples and eggs while both remain on the table.</span></div>
+          <div class="spec-row"><span class="tag is-low">Low-level</span><span><b>Avoidance:</b> stay away from the stool on the way to pick up or place an egg.</span></div>
         </div>
         <div class="column domain-card">
           <img class="paper-figure" src="static/images/domain_kitchen.png" alt="Kitchen domain"
             data-label="Kitchen screenshot" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
           <h4>Kitchen</h4>
           <p class="domain-meta">Overcooked &middot; 699-dim state &middot; 5 subtasks</p>
-          <p style="margin-bottom: 0.75rem;">Prepare a salad with lettuce, tomatoes, and onions.</p>
-          <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Chopping:</b> follow a preferred
-              order, e.g., tomatoes &rarr; onions &rarr; lettuce.</span></div>
-          <div class="spec-row"><span class="tag is-light">Low-level</span><span>Fixed low-level policies; no low-level
-              reward design.</span></div>
+          <p style="margin-bottom: 0.75rem;">Prepare a salad from a tomato, an onion, and a lettuce.</p>
+          <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Chopping order:</b> chop the tomato first, then the onion, then the lettuce.</span></div>
+          <div class="spec-row"><span class="tag is-light">Low-level</span><span>No specification; the low-level policies are fixed.</span></div>
         </div>
       </div>
     </div>
@@ -634,11 +628,11 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
         <div class="columns is-vcentered">
           <div class="column is-3">
             <div class="video-spec">
-              <p class="video-spec-task"><b>Task:</b> Collect and deliver all supplies.</p>
+              <p class="video-spec-task"><b>Task:</b> Deliver all supplies on a disaster-response map.</p>
               <div class="video-spec-item"><span class="tag is-high">High-level</span>
-                <p><b>Persistence:</b> deliver all supplies of one type before switching to the other.</p></div>
+                <p><b>Persistence:</b> deliver all objects of one type before switching to the other type.</p></div>
               <div class="video-spec-item"><span class="tag is-low">Low-level</span>
-                <p><b>Safety:</b> avoid the yellow hazard zones while carrying supplies.</p></div>
+                <p><b>Safety:</b> avoid the yellow danger zones while delivering an object.</p></div>
             </div>
           </div>
           <div class="column">
@@ -660,11 +654,11 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
         <div class="columns is-vcentered">
           <div class="column is-3">
             <div class="video-spec">
-              <p class="video-spec-task"><b>Task:</b> Carry the apples and eggs from the dining table to the sink.</p>
+              <p class="video-spec-task"><b>Task:</b> Move all apples and eggs from the dining table to the sink.</p>
               <div class="video-spec-item"><span class="tag is-high">High-level</span>
-                <p><b>Diversity:</b> never deliver the same item type twice in a row.</p></div>
+                <p><b>Diversity:</b> alternate between apples and eggs while both remain on the table.</p></div>
               <div class="video-spec-item"><span class="tag is-low">Low-level</span>
-                <p><b>Avoidance:</b> stay away from the stool while going to pick up or drop off an egg.</p></div>
+                <p><b>Avoidance:</b> stay away from the stool on the way to pick up or place an egg.</p></div>
             </div>
           </div>
           <div class="column">
@@ -686,9 +680,9 @@ def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[fl
         <div class="columns is-vcentered">
           <div class="column is-3">
             <div class="video-spec">
-              <p class="video-spec-task"><b>Task:</b> Prepare a salad with lettuce, tomatoes, and onions.</p>
+              <p class="video-spec-task"><b>Task:</b> Prepare a salad from a tomato, an onion, and a lettuce.</p>
               <div class="video-spec-item"><span class="tag is-high">High-level</span>
-                <p><b>Chopping order:</b> tomato &rarr; onion &rarr; lettuce.</p></div>
+                <p><b>Chopping order:</b> chop the tomato first, then the onion, then the lettuce.</p></div>
               <div class="video-spec-item"><span class="tag is-light">Low-level</span>
                 <p>No specification; the low-level policies are fixed.</p></div>
             </div>
