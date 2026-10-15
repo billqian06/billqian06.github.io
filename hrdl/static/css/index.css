@@ -1,0 +1,504 @@
+/* HRDL project page. Layout follows the Nerfies / Eureka project-page template (Bulma). */
+
+:root {
+    --accent: #2563eb;
+    --accent-soft: #eef3fd;
+    --hier: #2563eb;
+    --flat: #8a8a8a;
+    --ink: #1f2328;
+    --muted: #57606a;
+    --rule: #e5e7eb;
+}
+
+body {
+    font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+}
+
+.publication-title,
+.title {
+    font-family: "Google Sans", "Noto Sans", sans-serif;
+}
+
+.publication-title {
+    line-height: 1.2;
+}
+
+.publication-acronym {
+    color: var(--accent);
+}
+
+.publication-venue {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.2rem 0.9rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.publication-authors {
+    font-family: "Google Sans", "Noto Sans", sans-serif;
+}
+
+.publication-authors a {
+    color: var(--accent) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+    display: inline-block;
+}
+
+.link-block a {
+    margin: 5px 2px;
+}
+
+.tldr {
+    max-width: 52rem;
+    margin: 1.25rem auto 0;
+    font-size: 1.15rem;
+    color: var(--muted);
+}
+
+.content p {
+    font-size: 1.05rem;
+}
+
+.content p.section-lead {
+    font-size: 1.15rem;
+}
+
+/* ---------- Figures ---------- */
+
+.paper-figure {
+    display: block;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.figure-caption {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-align: left;
+}
+
+.figure-caption b {
+    color: var(--ink);
+}
+
+/* Shown in place of any image/video that has not been added yet (see static/js/index.js). */
+.figure-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 160px;
+    padding: 1.5rem;
+    border: 2px dashed #b5b5b5;
+    border-radius: 8px;
+    background: repeating-linear-gradient(-45deg, #fafafa, #fafafa 12px, #f3f3f3 12px, #f3f3f3 24px);
+    color: #7a7a7a;
+    text-align: center;
+}
+
+.figure-placeholder .placeholder-title {
+    margin-top: 0.5rem;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+.figure-placeholder .placeholder-path {
+    margin-top: 0.25rem;
+    font-family: "Source Code Pro", Menlo, monospace;
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+/* Let flex columns shrink below their content width (long placeholder paths, wide tables). */
+.columns > .column {
+    min-width: 0;
+}
+
+/* ---------- Concept cards ---------- */
+
+.concept-card {
+    height: 100%;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.concept-card .concept-kicker {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.concept-card h4 {
+    margin: 0.35rem 0 0.6rem;
+    font-family: "Google Sans", "Noto Sans", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.concept-card p {
+    font-size: 1rem;
+    color: var(--muted);
+}
+
+.callout {
+    padding: 1.1rem 1.4rem;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    background: var(--accent-soft);
+}
+
+.callout p:not(:last-child) {
+    margin-bottom: 0.6rem;
+}
+
+/* ---------- HRD: reward inputs and word equations ---------- */
+
+.reward-table {
+    width: 100%;
+}
+
+.reward-table th,
+.reward-table td {
+    vertical-align: middle !important;
+}
+
+.reward-table .reward-name {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.reward-origin {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.reward-table tr.is-flat td {
+    color: var(--muted);
+}
+
+.arg {
+    display: inline-block;
+    margin: 0.15rem 0.1rem;
+    padding: 0.1rem 0.6rem;
+    border: 1px solid #d0d7de;
+    border-radius: 999px;
+    background: #f6f8fa;
+    color: var(--ink);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.arg.is-new {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.word-eq {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.6rem 0;
+}
+
+.eq-term {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    background: #f6f8fa;
+    font-size: 0.95rem;
+}
+
+.eq-term.is-total {
+    min-width: 10.5rem;
+    border-color: var(--ink);
+    background: var(--ink);
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+}
+
+.eq-term.is-language {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.eq-op {
+    color: var(--muted);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* ---------- L2HR prompt ---------- */
+
+.prompt-steps {
+    counter-reset: step;
+    list-style: none;
+    margin: 0 !important;
+}
+
+.prompt-steps li {
+    position: relative;
+    margin-bottom: 0.7rem;
+    padding-left: 2.4rem;
+}
+
+.prompt-steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    top: 0.05rem;
+    left: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.6rem;
+    text-align: center;
+}
+
+.code-panel {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.code-panel-header {
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    background: #f6f8fa;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.code-panel pre {
+    margin: 0;
+    padding: 1rem;
+    background: #fff;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+}
+
+.code-panel pre code.hljs {
+    padding: 0;
+    background: transparent;
+}
+
+.spec-text b {
+    color: var(--accent);
+}
+
+.stage-card {
+    height: 100%;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    background: #f6f8fa;
+}
+
+.stage-card h4 {
+    margin-bottom: 0.5rem;
+    font-family: "Google Sans", "Noto Sans", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* ---------- Domains ---------- */
+
+.domain-card .figure-placeholder,
+.domain-card .paper-figure {
+    margin-bottom: 0.9rem;
+}
+
+.domain-card h4 {
+    font-family: "Google Sans", "Noto Sans", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.domain-meta {
+    margin: 0.25rem 0 0.75rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.spec-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
+    font-size: 0.95rem;
+}
+
+.spec-row .tag {
+    flex-shrink: 0;
+    min-width: 5.2rem;
+}
+
+.tag.is-high {
+    background: var(--accent);
+    color: #fff;
+}
+
+.tag.is-low {
+    background: #dbe6fb;
+    color: #1e40af;
+}
+
+/* ---------- Results ---------- */
+
+.stat-tile {
+    height: 100%;
+    padding: 1.1rem 1rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-tile .stat-domain {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.stat-tile .stat-value {
+    margin: 0.3rem 0 0.1rem;
+    font-family: "Google Sans", "Noto Sans", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--hier);
+}
+
+.stat-tile .stat-vs {
+    font-size: 0.95rem;
+    color: var(--flat);
+}
+
+.stat-tile .stat-label {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.question-label {
+    display: inline-block;
+    margin-right: 0.4rem;
+    padding: 0.05rem 0.55rem;
+    border-radius: 6px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.results-table-wrapper {
+    overflow-x: auto;
+}
+
+.results-table {
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.results-table th,
+.results-table td {
+    text-align: center !important;
+    vertical-align: middle !important;
+    white-space: nowrap;
+}
+
+.results-table th.domain-cell {
+    text-align: left !important;
+}
+
+.results-table tr.is-hier td {
+    background: var(--accent-soft);
+    font-weight: 700;
+}
+
+.results-table tr.is-hier td.method-cell {
+    color: var(--hier);
+}
+
+.results-table .group-start td,
+.results-table .group-start th {
+    border-top: 2px solid #c9ccd1;
+}
+
+.table-note {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* ---------- Videos ---------- */
+
+.video-label {
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.video-label.is-hier {
+    color: var(--hier);
+}
+
+.video-label.is-flat {
+    color: var(--flat);
+}
+
+.video-grid video {
+    display: block;
+    width: 100%;
+    border-radius: 6px;
+}
+
+/* ---------- BibTeX & footer ---------- */
+
+#BibTeX pre {
+    position: relative;
+    border-radius: 8px;
+}
+
+.copy-bibtex {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+}
+
+.footer {
+    padding: 2rem 1.5rem 3rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.footer a {
+    color: var(--accent);
+}

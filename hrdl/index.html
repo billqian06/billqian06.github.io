@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HRDL | Hierarchical Reward Design from Language</title>
+    <meta name="description" content="Hierarchical Reward Design from Language: Enhancing Alignment of Agent Behavior with Human Specifications (AAMAS 2026).">
+    <meta property="og:title" content="Hierarchical Reward Design from Language (AAMAS 2026)">
+    <meta property="og:description" content="HRDL extends reward design to hierarchical RL agents; L2HR uses LLMs to turn natural-language specifications into high- and low-level rewards.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://billqian06.github.io/hrdl/">
+    <meta property="og:image" content="https://billqian06.github.io/hrdl/static/images/overview.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="static/js/index.js"></script>
+</head>
+
+<!--
+    FIGURES: every <img>/<video> below points at a file under hrdl/static/images/ or hrdl/static/videos/.
+    Until that file exists, the page shows a dashed placeholder box with the expected path,
+    so adding a figure is just saving it under that name (or editing the src attribute).
+-->
+
+<body>
+
+    <!-- ===================== Title / authors / links ===================== -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-2 publication-title">
+                            Hierarchical Reward Design from Language: Enhancing Alignment of Agent Behavior with Human Specifications
+                        </h1>
+                        <span class="publication-venue">AAMAS 2026</span>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a target="_blank" href="https://billqian06.github.io/">Zhiqin&#160;Qian</a>,
+                            </span>
+                            <!-- TODO: add homepage link, e.g. <a target="_blank" href="...">Ryan&#160;Diaz</a> -->
+                            <span class="author-block">Ryan&#160;Diaz,</span>
+                            <!-- TODO: add homepage link -->
+                            <span class="author-block">Sangwon&#160;Seo,</span>
+                            <span class="author-block">
+                                <a target="_blank" href="https://unhelkar.github.io/">Vaibhav&#160;Unhelkar</a>
+                            </span>
+                        </div>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">Rice University</span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <span class="link-block">
+                                    <a target="_blank" href="/assets/pdf/qian2026_hrd.pdf"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="fa-solid fa-file-pdf"></i></span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a target="_blank" href="https://arxiv.org/abs/2602.18582"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="ai ai-arxiv"></i></span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+                                <!-- TODO: uncomment once the code is public.
+                                <span class="link-block">
+                                    <a target="_blank" href="https://github.com/..."
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="fa-brands fa-github"></i></span>
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                                -->
+                                <span class="link-block">
+                                    <a href="#BibTeX" class="button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="fa-solid fa-quote-left"></i></span>
+                                        <span>BibTeX</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Teaser (Figure 1) ===================== -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container is-max-desktop">
+            <img class="paper-figure" src="static/images/overview.png"
+                alt="Overview of flat vs. hierarchical reward design"
+                data-label="Figure 1: Flat vs. hierarchical reward design overview" data-ratio="16 / 7"
+                onerror="hrdlPlaceholder(this)">
+            <p class="figure-caption">
+                <b>Figure 1.</b> Unlike prior work on reward design, HRDL decomposes reward design into a low-level
+                and a high-level reward. Language to Hierarchical Rewards (L2HR), our
+                solution to HRDL, uses language models to synthesize these hierarchical rewards, enabling existing RL
+                algorithms to train agents that are better aligned with human specifications.
+            </p>
+            <p class="tldr has-text-centered">
+                <b>TL;DR</b>: Long-horizon behavior specifications are about <i>what</i> subtasks an agent does,
+                <i>in which order</i>, and <i>how</i>. We formalize reward design for hierarchical RL agents and
+                show that LLM-generated hierarchical rewards align agents with language specifications far better
+                than flat rewards.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===================== Abstract ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            When training AI agents to perform tasks, humans often care not only about <i>whether</i> a
+                            task is completed but also <i>how</i> it is performed. As agents tackle increasingly complex
+                            tasks, aligning their behavior with human-provided specifications becomes critical for
+                            responsible AI deployment. <i>Reward design</i> provides a direct channel for such alignment by
+                            translating human expectations into reward functions that guide reinforcement learning (RL).
+                            However, existing methods are often too limited to capture nuanced human preferences that
+                            arise in long-horizon tasks. Hence, we introduce <b>Hierarchical Reward Design for Language
+                            (HRDL)</b>: a problem formulation that extends classical reward design to encode richer
+                            behavioral specifications for Hierarchical RL agents. We further propose <b>Language to
+                            Hierarchical Rewards (L2HR)</b>, our proposed solution to HRDL. Human subject and numerical
+                            experiments show that Hierarchical RL agents trained with rewards designed via L2HR not only
+                            complete tasks effectively but also better adhere to human specifications. Together, HRD and
+                            L2HR advance the research on human-aligned AI agents.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Motivation ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">Why Hierarchical Reward Design?</h2>
+            <div class="content">
+                <p class="section-lead">
+                    Humans rarely think about tasks as monolithic goals. We break them into subtasks: <i>&ldquo;first
+                    prepare the ingredients, then cook, then serve.&rdquo;</i> Hierarchical RL mirrors this structure and
+                    lets agents solve increasingly long-horizon tasks, but <b>reward design for hierarchical agents has
+                    remained largely unexplored</b>.
+                </p>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="concept-card">
+                        <div class="concept-kicker">What</div>
+                        <h4>Which subtasks to perform</h4>
+                        <p>&ldquo;Collect and deliver all supplies in the environment.&rdquo;</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="concept-card">
+                        <div class="concept-kicker">Which order</div>
+                        <h4>How subtasks are sequenced</h4>
+                        <p>&ldquo;Group objects of the same type: deliver all supplies of one type before switching.&rdquo;</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="concept-card">
+                        <div class="concept-kicker">How</div>
+                        <h4>How each subtask is executed</h4>
+                        <p>&ldquo;Avoid yellow danger zones when delivering an object.&rdquo;</p>
+                    </div>
+                </div>
+            </div>
+            <div class="columns is-vcentered" style="margin-top: 1rem;">
+                <div class="column is-7">
+                    <div class="content">
+                        <p>
+                            Existing reward design methods encode such specifications in a single <b>flat</b> reward,
+                            which scores each action using only the current state. A flat reward cannot see which subtask the agent is
+                            pursuing or which one it just finished, so it cannot express preferences over subtask order or
+                            subtask-dependent execution. We show, both theoretically and empirically, that flat rewards
+                            are fundamentally limited in capturing specifications for long-horizon tasks.
+                        </p>
+                        <p>
+                            Many prior works <i>assume access</i> to hierarchical rewards for training agents, but the
+                            problem of <i>designing</i> them has not been formally defined. Just as the classical Reward
+                            Design Problem grounded algorithmic reward design for flat RL, HRD provides a principled
+                            foundation for designing hierarchical reward structures.
+                        </p>
+                    </div>
+                </div>
+                <div class="column is-5">
+                    <img class="paper-figure" src="static/images/related_work_venn.png"
+                        alt="Venn diagram relating this work to hierarchical rewards and reward design"
+                        data-label="Figure 2: Venn diagram of related work" data-ratio="4 / 3"
+                        onerror="hrdlPlaceholder(this)">
+                    <p class="figure-caption">
+                        <b>Figure 2.</b> Prior work has used multi-level rewards to train hierarchical agents, but the
+                        <i>design</i> of such rewards lacks a concrete problem formulation. This work bridges that gap.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== HRD formulation ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">Hierarchical Reward Design (HRD)</h2>
+            <div class="content">
+                <p class="section-lead">
+                    The key idea: let the reward see the same subtask structure that a hierarchical agent uses. HRD
+                    replaces one flat reward with two: a <b>high-level reward</b> for choosing subtasks and a
+                    <b>low-level reward</b> for carrying them out.
+                </p>
+            </div>
+
+            <div class="results-table-wrapper">
+                <table class="table reward-table">
+                    <thead>
+                        <tr><th>Reward</th><th>What it looks at</th><th>What it scores</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="is-flat">
+                            <td class="reward-name">Flat<span class="reward-origin">Prior work</span></td>
+                            <td><span class="arg">state</span> <span class="arg">action</span></td>
+                            <td>Each action</td>
+                        </tr>
+                        <tr>
+                            <td class="reward-name">High-level<span class="reward-origin">HRD</span></td>
+                            <td><span class="arg is-new">previous subtask</span> <span class="arg">state</span> <span class="arg is-new">next subtask</span></td>
+                            <td>Which subtask to do next</td>
+                        </tr>
+                        <tr>
+                            <td class="reward-name">Low-level<span class="reward-origin">HRD</span></td>
+                            <td><span class="arg">state</span> <span class="arg is-new">current subtask</span> <span class="arg">action</span></td>
+                            <td>Each action, knowing which subtask it serves</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-note"><span class="arg is-new">Highlighted</span> inputs are subtask information that a flat reward never sees.</p>
+
+            <div class="columns" style="margin-top: 1rem;">
+                <div class="column">
+                    <div class="concept-card">
+                        <div class="concept-kicker">Knowing the previous subtask</div>
+                        <h4>Rules about order</h4>
+                        <p>
+                            <i>&ldquo;Deliver all supplies of one type before switching.&rdquo;</i> Whether the next
+                            delivery is acceptable depends on what was delivered last. The high-level reward sees that;
+                            a flat reward has no record of it.
+                        </p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="concept-card">
+                        <div class="concept-kicker">Knowing the current subtask</div>
+                        <h4>Rules that depend on the subtask</h4>
+                        <p>
+                            <i>&ldquo;Avoid the stool while going to pick up or drop off an egg.&rdquo;</i> The same
+                            step near the stool is fine during one subtask and penalized during another. The low-level
+                            reward knows which subtask the agent is on; a flat reward sees the position but not the purpose.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="title is-5" style="margin-top: 1.5rem;">From language to rewards (HRDL)</h3>
+            <div class="content">
+                <p>
+                    HRDL starts from the rewards a task already has: one for finishing the task and one for finishing
+                    each subtask. It keeps those and adds an <b>alignment reward</b> at each level, generated from the
+                    user's written specification:
+                </p>
+            </div>
+            <div class="word-eq">
+                <span class="eq-term is-total">High-level reward</span>
+                <span class="eq-op">=</span>
+                <span class="eq-term">task reward</span>
+                <span class="eq-op">+</span>
+                <span class="eq-term is-language">alignment reward for choosing subtasks</span>
+            </div>
+            <div class="word-eq">
+                <span class="eq-term is-total">Low-level reward</span>
+                <span class="eq-op">=</span>
+                <span class="eq-term">subtask-completion reward</span>
+                <span class="eq-op">+</span>
+                <span class="eq-term is-language">alignment reward for carrying them out</span>
+            </div>
+            <p class="table-note"><span class="arg is-new">Highlighted</span> terms are generated from the natural-language specification.</p>
+            <div class="content" style="margin-top: 1rem;">
+                <p>
+                    Keeping the original rewards means the agent still learns to finish the task, while the alignment
+                    rewards shape <i>how</i> it does so. Each level is a standard RL problem, so off-the-shelf algorithms
+                    train it: PPO for the low level and DQN-style methods for the high level.
+                </p>
+                <p>
+                    The goal is the pair of rewards whose trained agent best follows the specification. That is only
+                    measured afterwards, with handcrafted ground-truth rewards or human ratings, so the rewards have to
+                    be right without that feedback during training.
+                </p>
+            </div>
+            <div class="callout">
+                <p><b>Hierarchical rewards can express everything flat rewards can, and more.</b></p>
+                <p>
+                    A hierarchical reward can simply ignore its subtask inputs and act like a flat one. The reverse
+                    doesn't hold: some specifications about which subtask comes next, or how to act during a particular
+                    subtask, can't be written as a flat reward at all. The paper proves this formally (Properties 1
+                    and 2, Appendix B.3).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== L2HR ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">L2HR: Language to Hierarchical Rewards</h2>
+            <div class="content">
+                <p class="section-lead">
+                    L2HR prompts an LLM to write executable high- and low-level reward functions directly from a
+                    natural-language specification, without any feedback during training on whether the agent follows it.
+                </p>
+            </div>
+
+            <div class="columns">
+                <div class="column is-5">
+                    <h3 class="title is-5">Prompt components</h3>
+                    <ol class="prompt-steps content">
+                        <li><b>Task description</b>, including the approximate scale of the task reward. The task reward
+                            code itself is withheld so the LLM does not overfit to implementation details.</li>
+                        <li><b>Environment code context</b> exposing the state and action spaces without leaking
+                            simulation internals.</li>
+                        <li><b>Subtask (option) and action spaces</b>, with the semantic role of each, so the LLM
+                            separates high-level from low-level decisions.</li>
+                        <li><b>Behavior specification</b> describing the desired behavior beyond task completion.</li>
+                        <li><b>Formatting and reward design tips</b>, e.g., no new global variables, and balance designed
+                            rewards against the task reward.</li>
+                    </ol>
+                </div>
+                <div class="column is-7">
+                    <h3 class="title is-5">Example (iTHOR)</h3>
+                    <div class="code-panel" style="margin-bottom: 1rem;">
+                        <div class="code-panel-header">Input: natural-language specifications</div>
+                        <pre class="spec-text"><b>Task description:</b> The objective is to pick up all apples and eggs on the dining table and place them in the sink...
+<b>Environment context:</b> class ThorPickPlaceEnv(gym.Env): ...
+<b>Relevant task spaces:</b> The agent's option/subtask space consists of picking up and placing the two types of objects...
+<b>Low-level user preference:</b> The agent should avoid the stool while on its way to pick up or drop an egg...
+<b>High-level user preference:</b> The agent should pick up an object type that is different from what was previously picked...
+<b>Additional info:</b> Do not use function attributes or global variables...</pre>
+                    </div>
+                    <div class="code-panel">
+                        <div class="code-panel-header">Output: reward functions designed by L2HR</div>
+                        <pre><code class="language-python"># High-level preference reward
+def get_high_level_pref_gpt(state: Dict, prev_option: int, option: int) -&gt; Tuple[float, Dict[str, float]]:
+    ...
+    return reward, reward_components
+
+# Low-level preference reward
+def get_low_level_pref_gpt(state: Dict, option: int, action: int) -&gt; Tuple[float, Dict[str, float]]:
+    ...
+    return reward, reward_components</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="title is-5" style="margin-top: 1.5rem;">Two-stage training</h3>
+            <div class="columns">
+                <div class="column">
+                    <div class="stage-card">
+                        <h4>Stage 1 &middot; Low level</h4>
+                        <p>
+                            The LLM writes several candidate low-level alignment rewards (8 in our experiments). Each
+                            one trains a low-level policy together with the subtask-completion reward. Only policies that
+                            still reliably finish their subtasks are kept.
+                        </p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="stage-card">
+                        <h4>Stage 2 &middot; High level</h4>
+                        <p>
+                            The LLM writes candidate high-level alignment rewards. Each one trains a high-level policy
+                            together with the task reward, on top of a kept low-level policy. Reward pairs whose agents
+                            still complete the task are returned.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <p>
+                    Candidates are filtered with lightweight checks: the code must compile and reference only the state,
+                    subtask, and action variables exposed in the prompt. In practice, at least one sample per batch passes
+                    and preserves task feasibility. The two-stage structure keeps the design modular and lets subtask
+                    policies be reused.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Domains ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">Domains</h2>
+            <div class="content">
+                <p class="section-lead">
+                    Three long-horizon, multi-subtask domains. In Rescue World and iTHOR, flat rewards cannot in principle
+                    capture every specification; in Kitchen they can. This contrast tests how well language becomes
+                    reward in both regimes.
+                </p>
+            </div>
+            <div class="columns">
+                <div class="column domain-card">
+                    <img class="paper-figure" src="static/images/domain_rescue_world.png" alt="Rescue World domain"
+                        data-label="Rescue World screenshot" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
+                    <h4>Rescue World</h4>
+                    <p class="domain-meta">Variant of RW4T &middot; 407-dim state &middot; 8 subtasks</p>
+                    <p style="margin-bottom: 0.75rem;">Collect and deliver all supplies in a disaster-response map.</p>
+                    <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Persistence:</b> deliver all supplies of one type before switching.</span></div>
+                    <div class="spec-row"><span class="tag is-low">Low-level</span><span><b>Safety:</b> avoid hazard zones while carrying supplies.</span></div>
+                </div>
+                <div class="column domain-card">
+                    <img class="paper-figure" src="static/images/domain_ithor.png" alt="iTHOR domain"
+                        data-label="iTHOR screenshot" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
+                    <h4>iTHOR</h4>
+                    <p class="domain-meta">AI2-THOR kitchen &middot; 30-dim state &middot; 8 subtasks</p>
+                    <p style="margin-bottom: 0.75rem;">Carry apples and eggs from the dining table to the sink.</p>
+                    <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Diversity:</b> deliver a different item type than the previous one.</span></div>
+                    <div class="spec-row"><span class="tag is-low">Low-level</span><span><b>Avoidance:</b> stay away from the stool while picking up or delivering an egg.</span></div>
+                </div>
+                <div class="column domain-card">
+                    <img class="paper-figure" src="static/images/domain_kitchen.png" alt="Kitchen domain"
+                        data-label="Kitchen screenshot" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
+                    <h4>Kitchen</h4>
+                    <p class="domain-meta">Single-agent Overcooked &middot; 699-dim state &middot; 5 subtasks</p>
+                    <p style="margin-bottom: 0.75rem;">Prepare a salad with lettuce, tomatoes, and onions.</p>
+                    <div class="spec-row"><span class="tag is-high">High-level</span><span><b>Chopping:</b> follow a preferred order, e.g., tomatoes &rarr; onions &rarr; lettuce.</span></div>
+                    <div class="spec-row"><span class="tag is-light">Low-level</span><span>Fixed low-level policies; no low-level reward design.</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Results ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">Results</h2>
+            <div class="content">
+                <p class="section-lead">
+                    We compare L2HR (<b>Hier</b>) with an LLM that generates a flat reward from the same specification
+                    (<b>Flat</b>) and a <b>Task</b>-reward-only baseline. Each LLM configuration produces 24 reward
+                    candidates (3 trials &times; 8 candidates).
+                </p>
+            </div>
+
+            <div class="columns is-multiline">
+                <div class="column is-3-desktop is-6-tablet">
+                    <div class="stat-tile">
+                        <div class="stat-domain">Rescue World</div>
+                        <div class="stat-value">69.2%</div>
+                        <div class="stat-vs">vs. 12.5% Flat</div>
+                        <div class="stat-label">of policies reach expert-level alignment on both levels</div>
+                    </div>
+                </div>
+                <div class="column is-3-desktop is-6-tablet">
+                    <div class="stat-tile">
+                        <div class="stat-domain">iTHOR</div>
+                        <div class="stat-value">37.68</div>
+                        <div class="stat-vs">vs. 3.27 Flat</div>
+                        <div class="stat-label">total return (task + alignment)</div>
+                    </div>
+                </div>
+                <div class="column is-3-desktop is-6-tablet">
+                    <div class="stat-tile">
+                        <div class="stat-domain">Kitchen</div>
+                        <div class="stat-value">92.9%</div>
+                        <div class="stat-vs">vs. 10.0% Flat</div>
+                        <div class="stat-label">of policies follow the chopping specification</div>
+                    </div>
+                </div>
+                <div class="column is-3-desktop is-6-tablet">
+                    <div class="stat-tile">
+                        <div class="stat-domain">User study</div>
+                        <div class="stat-value">4.76</div>
+                        <div class="stat-vs">vs. 2.42 Flat</div>
+                        <div class="stat-label">human rating for persistence in Rescue World (1&ndash;5)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q1 + Q2 -->
+            <div class="columns" style="margin-top: 1.5rem;">
+                <div class="column">
+                    <h3 class="title is-5"><span class="question-label">Q1</span>Is the generated code valid?</h3>
+                    <img class="paper-figure" src="static/images/syntax_error_rates.png" alt="Syntax error rates"
+                        data-label="Figure 5: Syntax error rates" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
+                    <p class="figure-caption">
+                        <b>Figure 5.</b> Syntax error rates for LLM-based reward generation (24 candidates per configuration).
+                    </p>
+                    <div class="content" style="margin-top: 0.75rem;">
+                        <p>
+                            Hierarchical generation has far lower error rates in all three domains. Without access to the
+                            previous subtask, flat generation hallucinates variables such as
+                            <code>last_delivered_type</code> to enforce persistence; in Kitchen it struggles with
+                            coordinate-level action logic. Seeing the subtasks lets L2HR reason about steps like
+                            &ldquo;chop onion&rdquo; directly.
+                        </p>
+                    </div>
+                </div>
+                <div class="column">
+                    <h3 class="title is-5"><span class="question-label">Q2</span>Can the agent still finish the task?</h3>
+                    <img class="paper-figure" src="static/images/task_completion_rates.png" alt="Task completion rates"
+                        data-label="Figure 6: Task completion rates" data-ratio="4 / 3" onerror="hrdlPlaceholder(this)">
+                    <p class="figure-caption">
+                        <b>Figure 6.</b> Share of syntactically valid reward candidates that preserve task feasibility.
+                    </p>
+                    <div class="content" style="margin-top: 0.75rem;">
+                        <p>
+                            Hier preserves task feasibility more often than Flat in every domain. Flat rewards lean on
+                            spurious heuristics, such as inferring the last-delivered item from the agent's location, and
+                            accumulate reward in unintended ways.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <h3 class="title is-5" style="margin-top: 1.5rem;"><span class="question-label">Q3</span>Does the agent follow the specification?</h3>
+            <div class="results-table-wrapper">
+                <table class="table is-hoverable results-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="domain-cell">Domain</th>
+                            <th rowspan="2">Method</th>
+                            <th colspan="2">High-Level</th>
+                            <th colspan="2">Low-Level</th>
+                            <th colspan="2">Total</th>
+                        </tr>
+                        <tr>
+                            <th>Reward &uarr;</th><th>Expert % &uarr;</th>
+                            <th>Reward &uarr;</th><th>Expert % &uarr;</th>
+                            <th>Reward &uarr;</th><th>Expert % &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="group-start">
+                            <th rowspan="3" class="domain-cell">Rescue World</th>
+                            <td class="method-cell">Task</td>
+                            <td>11.22 &plusmn; 5.57</td><td>20.00</td><td>&minus;16.46 &plusmn; 5.49</td><td>0.00</td><td>73.80 &plusmn; 5.70</td><td>0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="method-cell">Flat</td>
+                            <td>9.38 &plusmn; 7.02</td><td>12.50</td><td>&minus;2.62 &plusmn; 5.19</td><td>62.50</td><td>85.13 &plusmn; 9.33</td><td>12.50</td>
+                        </tr>
+                        <tr class="is-hier">
+                            <td class="method-cell">Hier</td>
+                            <td>16.65 &plusmn; 6.93</td><td>76.92</td><td>&minus;0.69 &plusmn; 1.58</td><td>76.92</td><td>93.98 &plusmn; 9.01</td><td>69.23</td>
+                        </tr>
+                        <tr class="group-start">
+                            <th rowspan="3" class="domain-cell">iTHOR</th>
+                            <td class="method-cell">Task</td>
+                            <td>4.10 &plusmn; 1.34</td><td>0.00</td><td>&minus;23.38 &plusmn; 1.86</td><td>0.00</td><td>12.31 &plusmn; 0.66</td><td>0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="method-cell">Flat</td>
+                            <td>7.67 &plusmn; 4.48</td><td>0.00</td><td>&minus;35.20 &plusmn; 12.42</td><td>0.00</td><td>3.27 &plusmn; 9.31</td><td>0.00</td>
+                        </tr>
+                        <tr class="is-hier">
+                            <td class="method-cell">Hier</td>
+                            <td>14.19 &plusmn; 2.23</td><td>87.50</td><td>&minus;3.75 &plusmn; 8.14</td><td>75.00</td><td>37.68 &plusmn; 6.68</td><td>62.50</td>
+                        </tr>
+                        <tr class="group-start">
+                            <th rowspan="3" class="domain-cell">Kitchen</th>
+                            <td class="method-cell">Task</td>
+                            <td>0.00 &plusmn; 0.00</td><td>0.00</td><td>&ndash;</td><td>&ndash;</td><td>0.75 &plusmn; 0.00</td><td>0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="method-cell">Flat</td>
+                            <td>0.06 &plusmn; 0.13</td><td>10.00</td><td>&ndash;</td><td>&ndash;</td><td>0.80 &plusmn; 0.12</td><td>10.00</td>
+                        </tr>
+                        <tr class="is-hier">
+                            <td class="method-cell">Hier</td>
+                            <td>0.39 &plusmn; 0.05</td><td>92.86</td><td>&ndash;</td><td>&ndash;</td><td>1.08 &plusmn; 0.05</td><td>92.86</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-note">
+                <b>Table 1.</b> Alignment is measured with handcrafted ground-truth rewards; &ldquo;Total&rdquo; adds the
+                task reward and both alignment rewards. &ldquo;Expert %&rdquo; is the share of policies that attain the
+                maximum possible return for that metric. Flat and Hier statistics are over candidates that complete the task.
+            </p>
+            <div class="content" style="margin-top: 1rem;">
+                <p>
+                    Hier leads on high-level alignment everywhere, because persistence (Rescue World) and diversity
+                    (iTHOR) depend on the previous subtask, which flat rewards cannot see. In iTHOR, Hier also wins on
+                    low-level alignment (&minus;3.75 vs. &minus;35.20): flat rewards only penalized the stool at the
+                    moment of picking or placing, since the agent's intent is hard to infer from state alone.
+                </p>
+                <p>
+                    Kitchen shows that hierarchy helps <b>even when flat rewards are theoretically sufficient</b>. A flat
+                    reward could encode the chopping order, but only one flat candidate did so correctly. High-level
+                    abstractions make the specification easier for the LLM to implement.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== User study ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">Evaluation with Human Participants</h2>
+            <div class="content">
+                <p class="section-lead">
+                    Ground-truth rewards are rarely available in practice, so we ran an IRB-approved study in which people,
+                    rather than handcrafted rewards, judged how well each agent followed the specification.
+                </p>
+                <p>
+                    Participants recruited on Prolific watched videos of Flat and Hier agents in Rescue World and Kitchen,
+                    without knowing which method produced each, and rated how well each behavior matched the written
+                    specification from 1 (least aligned) to 5 (most aligned). We analyzed 30 participants who passed
+                    attention checks, split evenly across the two domains.
+                </p>
+            </div>
+            <div class="columns is-vcentered">
+                <div class="column is-7">
+                    <img class="paper-figure" src="static/images/human_ratings.png" alt="Human ratings of agent alignment"
+                        data-label="Figure 7: Human ratings for agent alignment" data-ratio="16 / 9"
+                        onerror="hrdlPlaceholder(this)">
+                    <p class="figure-caption"><b>Figure 7.</b> Human-provided ratings for agent alignment.</p>
+                </div>
+                <div class="column is-5">
+                    <div class="content">
+                        <ul>
+                            <li><b>Rescue World persistence:</b> 4.76 for Hier vs. 2.42 for Flat.</li>
+                            <li><b>Rescue World overall:</b> 4.64 vs. 3.46. Both methods were rated similarly on safety.</li>
+                            <li><b>Kitchen chopping:</b> 4.47 vs. 1.70 (<i>p</i> &lt; 0.001). The preferred order rarely happens by
+                                accident, so the gap is larger.</li>
+                            <li>Hier agents averaged above 4 in both domains.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="results-table-wrapper" style="margin-top: 1rem;">
+                <table class="table is-hoverable results-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Method</th>
+                            <th colspan="3">Rescue World</th>
+                            <th>Kitchen</th>
+                        </tr>
+                        <tr>
+                            <th>Persistence &uarr;</th><th>Safety &uarr;</th><th>Overall &uarr;</th><th>Chopping &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="method-cell">Flat</td>
+                            <td>12.50%</td><td>50.00%</td><td>12.50%</td><td>10.00%</td>
+                        </tr>
+                        <tr class="is-hier">
+                            <td class="method-cell">Hier</td>
+                            <td>76.92%</td><td>61.54%</td><td>53.85%</td><td>71.43%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-note">
+                <b>Table 2.</b> Share of candidate policies that received a perfect alignment score from every participant.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===================== Videos (optional: delete this section if not needed) ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">Learned Behaviors</h2>
+            <div class="content">
+                <p class="section-lead">Policies trained with flat vs. hierarchical rewards generated from the same specification.</p>
+            </div>
+            <div class="video-grid">
+                <h3 class="title is-5">Rescue World</h3>
+                <div class="columns">
+                    <div class="column">
+                        <p class="video-label is-flat">Flat</p>
+                        <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9" data-label="Rescue World, Flat policy video">
+                            <source src="static/videos/rescue_world_flat.mp4" type="video/mp4" onerror="hrdlPlaceholder(this)">
+                        </video>
+                    </div>
+                    <div class="column">
+                        <p class="video-label is-hier">Hier (L2HR)</p>
+                        <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9" data-label="Rescue World, Hier policy video">
+                            <source src="static/videos/rescue_world_hier.mp4" type="video/mp4" onerror="hrdlPlaceholder(this)">
+                        </video>
+                    </div>
+                </div>
+                <h3 class="title is-5">iTHOR</h3>
+                <div class="columns">
+                    <div class="column">
+                        <p class="video-label is-flat">Flat</p>
+                        <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9" data-label="iTHOR, Flat policy video">
+                            <source src="static/videos/ithor_flat.mp4" type="video/mp4" onerror="hrdlPlaceholder(this)">
+                        </video>
+                    </div>
+                    <div class="column">
+                        <p class="video-label is-hier">Hier (L2HR)</p>
+                        <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9" data-label="iTHOR, Hier policy video">
+                            <source src="static/videos/ithor_hier.mp4" type="video/mp4" onerror="hrdlPlaceholder(this)">
+                        </video>
+                    </div>
+                </div>
+                <h3 class="title is-5">Kitchen</h3>
+                <div class="columns">
+                    <div class="column">
+                        <p class="video-label is-flat">Flat</p>
+                        <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9" data-label="Kitchen, Flat policy video">
+                            <source src="static/videos/kitchen_flat.mp4" type="video/mp4" onerror="hrdlPlaceholder(this)">
+                        </video>
+                    </div>
+                    <div class="column">
+                        <p class="video-label is-hier">Hier (L2HR)</p>
+                        <video controls muted loop playsinline preload="metadata" data-ratio="16 / 9" data-label="Kitchen, Hier policy video">
+                            <source src="static/videos/kitchen_hier.mp4" type="video/mp4" onerror="hrdlPlaceholder(this)">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Conclusion ===================== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">Conclusion</h2>
+            <div class="content">
+                <p>
+                    HRD formulates a reward structure that is more expressive than flat rewards, plugs into existing
+                    decision-making frameworks and RL algorithms, and better encodes behavioral specifications for
+                    long-horizon tasks. L2HR, an initial solution, achieves considerably better or comparable results in
+                    both numerical and human evaluations.
+                </p>
+                <p>
+                    Our experiments use complex but simulated domains; evaluating HRD in real-world robotics and
+                    interactive AI systems is a natural next step, as is richer reward generation with evolutionary
+                    optimization or human feedback. Human-agent alignment is hard, and HRD is meant to complement
+                    learning from demonstrations, rankings, and corrections rather than replace them.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== BibTeX ===================== -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title is-3">BibTeX</h2>
+            <pre><button class="button is-small copy-bibtex" onclick="copyBibtex(this)"><span class="icon is-small"><i class="fa-regular fa-copy"></i></span><span class="copy-label">Copy</span></button><code id="bibtex-text" class="nohighlight">@inproceedings{qian2026hierarchical,
+  title     = {Hierarchical Reward Design from Language: Enhancing Alignment of Agent Behavior with Human Specifications},
+  author    = {Qian, Zhiqin and Diaz, Ryan and Seo, Sangwon and Unhelkar, Vaibhav},
+  booktitle = {Proceedings of the 25th International Conference on Autonomous Agents and Multiagent Systems (AAMAS)},
+  year      = {2026}
+}</code></pre>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container is-max-desktop has-text-centered">
+            <p>
+                <a href="https://billqian06.github.io/">Zhiqin Qian</a> &middot; Rice University
+            </p>
+            <p>
+                Page layout adapted from the <a target="_blank" href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+                project page template, as used by <a target="_blank" href="https://eureka-research.github.io/">Eureka</a>.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
