@@ -59,7 +59,7 @@ body {
 }
 
 .tldr {
-    max-width: 52rem;
+    max-width: 58rem;
     margin: 1.25rem auto 0;
     font-size: 1.15rem;
     color: var(--muted);
@@ -79,6 +79,39 @@ body {
     display: block;
     width: 100%;
     border-radius: 6px;
+}
+
+/* Figure 2 (related-work Venn diagram), drawn as inline SVG. */
+.venn-figure {
+    height: auto;
+    overflow: visible;
+}
+
+.venn-figure .venn-set {
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 3;
+}
+
+.venn-figure .venn-overlap {
+    fill: var(--accent-soft);
+}
+
+.venn-figure .venn-label {
+    font-size: 26px;
+    font-style: italic;
+    fill: var(--ink);
+    /* A thin same-color outline thickens the text slightly; Noto Sans is only loaded at 400/600/700. */
+    stroke: var(--ink);
+    stroke-width: 0.6;
+}
+
+.venn-figure .venn-core {
+    font-size: 30px;
+    font-weight: 700;
+    fill: var(--accent);
+    stroke: var(--accent);
+    stroke-width: 0.6;
 }
 
 .figure-caption {
@@ -335,6 +368,12 @@ body {
 .domain-card .figure-placeholder,
 .domain-card .paper-figure {
     margin-bottom: 0.9rem;
+}
+
+/* Same-height domain images: a shared box (iTHOR's ratio) with each image scaled to fit, uncropped. */
+.domain-card .paper-figure {
+    aspect-ratio: 1081 / 884;
+    object-fit: contain;
 }
 
 .domain-card h4 {
