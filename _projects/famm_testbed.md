@@ -37,6 +37,6 @@ While we can collect data on the state of the environment and the action taken b
     Left, a dummy wearing the BioHarness sensor. Right, a Tobii eye tracker attached to the computer.
 </div>
 
-In our ongoing research, we are using this testbed to train robots to model and adapt to their human teammates. One specific use case of the testbed is to verify the effectiveness of the <a href="https://www.ifaamas.org/Proceedings/aamas2022/pdfs/p982.pdf">Factorial Agent Markov Model</a>, developed by Unhelkar Lab, that predicts a human's behavior when taking the human's latent states into account.
+In our ongoing research, we are using this testbed to train robots to model and adapt to their human teammates. One specific use case of the testbed is to verify the effectiveness of the <a href="https://www.ifaamas.org/Proceedings/aamas2022/pdfs/p982.pdf">Factorial Agent Markov Model</a>, developed by the <a href="https://www.teaminglab.org/">Human-AI Teaming Lab</a>, that predicts a human's behavior when taking the human's latent states into account.
 
 Here is a <a href="https://docs.google.com/presentation/d/1hNe8ff4mNobSx16uSd8tROtu57SKS0um/edit#slide=id.g1249ba86a8c_2_75">link</a> to my poster showcasing our HRI testbed at the Rice Undergraduate Research Symposium.

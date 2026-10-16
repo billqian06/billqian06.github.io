@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /teaching/
-title: teaching
+title: Teaching
 description: Courses I have supported as a teaching assistant at Rice University.
 nav: true
 nav_order: 4

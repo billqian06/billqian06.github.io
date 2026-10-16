@@ -52,7 +52,14 @@ layout: default
             <div class="contact-row">
               {%- include social.html -%}
               {%- assign cv_page = site.pages | where: "layout", "cv" | first -%}
-              {%- if cv_page %}
+              {%- if page.cv_pdf %}
+              {%- if page.cv_pdf contains '://' -%}
+                {%- assign cv_url = page.cv_pdf -%}
+              {%- else -%}
+                {%- assign cv_url = page.cv_pdf | prepend: '/assets/pdf/' | relative_url -%}
+              {%- endif %}
+              <a href="{{ cv_url }}" target="_blank" rel="noopener" title="Curriculum vitae (PDF)"><i class="fas fa-file-alt"></i><span>CV</span></a>
+              {%- elsif cv_page %}
               <a href="{{ cv_page.url | relative_url }}" title="Curriculum vitae"><i class="fas fa-file-alt"></i><span>CV</span></a>
               {%- endif %}
             </div>

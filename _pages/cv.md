@@ -1,9 +1,8 @@
----
+<!-- ---
 layout: cv
 permalink: /cv/
-title: cv
-description: One page, as a PDF — education, research experience, publications, teaching, and volunteering.
+title: CV
 nav: true
 nav_order: 3
-cv_pdf: Curriculum_Vitae_BQian_2.pdf
----
+cv_pdf: Curriculum_Vitae_BQian.pdf
+--- -->

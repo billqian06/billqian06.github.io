@@ -9,3 +9,5 @@ _site
 Gemfile.lock
 vendor
 
+# Source-code archive of the HRDL page (shared privately, not published)
+hrdl-website.zip
