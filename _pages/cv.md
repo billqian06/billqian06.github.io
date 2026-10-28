@@ -4,5 +4,5 @@ permalink: /cv/
 title: CV
 nav: true
 nav_order: 3
-cv_pdf: Curriculum_Vitae_BQian.pdf
+cv_pdf: bqian_cv.pdf
 --- -->
